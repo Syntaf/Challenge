@@ -1,0 +1,11 @@
+ASCII Game of Life:This is called a cellular automaton. This means it is 
+based on a 'playing field' of sorts, made up of lots of little cells or 
+spaces. For Conway's game of life, the grid is square - but other shapes 
+like hexagonal ones could potentially exist too. Each cell can have a 
+value - in this case, on or off - and for each 'iteration' or loop of 
+the game, the value of each cell will change depending on the other cells 
+around it. This might sound confusing at first, but looks easier when you 
+break it down a bit.
+
+
+Language used: Rust
