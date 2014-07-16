@@ -7,6 +7,12 @@
 use std::io::File;
 use std::io::BufferedReader;
 
+fn convert_to_binary_string<'a>(tup: (&'a str,&str)) -> &'a str{
+  match tup {
+    (x,_) => x
+  }
+}
+
 fn main() {
   let path = Path::new("input.dat");
   let mut file = BufferedReader::new(File::open(&path));
@@ -25,8 +31,7 @@ fn main() {
       }
   }
 
-  for tup in bitmap_point.iter() {
-    println!("{}", tup);
-  }
+  let h = convert_to_binary_string( ("k","j") );
 
+  println!("{}", h);
 }
