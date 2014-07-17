@@ -7,10 +7,12 @@
 use std::io::File;
 use std::io::BufferedReader;
 
-fn convert_to_binary_string<'a>(tup: (&'a str,&str)) -> &'a str{
+fn convert_to_binary_string(tup: &(&str,&str) ) -> String{
+  let mut stringval: String =
   match tup {
-    (x,_) => x
-  }
+    &(x,y) => from_str(x).unwrap()
+  };
+  return stringval;
 }
 
 fn main() {
@@ -31,7 +33,7 @@ fn main() {
       }
   }
 
-  let h = convert_to_binary_string( ("k","j") );
+  let h = convert_to_binary_string( bitmap_point.get(0) );
 
   println!("{}", h);
 }
