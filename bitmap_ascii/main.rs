@@ -7,12 +7,31 @@
 use std::io::File;
 use std::io::BufferedReader;
 
+fn hex_to_bin(c: &str) -> &str{
+  match c {
+    "0" => "    ",
+    "1" => "   x",
+    "2" => "  x ",
+    "3" => "  xx",
+    "4" => " x  ",
+    "5" => " x x",
+    "6" => " xx ",
+    "7" => " xxx",
+    "8" => "x   ",
+    "9" => "x  x",
+    "A" => "x x ",
+    "B" => "x xx",
+    "C" => "xx  ",
+    "D" => "xx x",
+    "E" => "xxx ",
+    "F" => "xxxx",
+    _   => "ERROR"
+  }
+}
+
 fn convert_to_binary_string(tup: &(&str,&str) ) -> String{
-  let mut stringval: String =
-  match tup {
-    &(x,y) => from_str(x).unwrap()
-  };
-  return stringval;
+  let &(x, y) = tup;
+  hex_to_bin(x).to_string().append(hex_to_bin(y))
 }
 
 fn main() {
@@ -33,7 +52,9 @@ fn main() {
       }
   }
 
-  let h = convert_to_binary_string( bitmap_point.get(0) );
+  for command in bitmap_point.iter() {
+    let res = convert_to_binary_string( command );
+    println!("{}", res);
+  }
 
-  println!("{}", h);
 }
