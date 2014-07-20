@@ -12,11 +12,29 @@
 
 mod loadHex;
 
-fn main() {
-  let results = loadHex::read_file("input.dat");
+//zoom hex picture
+fn zoom_hex(tup: &(String, String)) {
 
-  for command in results.iter() {
+}
+
+//rotate hex picture
+fn rotate_hex(tup: &(String, String)) {
+
+}
+
+//invert hex picture
+fn invert_hex(tup: &(String, String)) {
+
+}
+
+fn main() {
+  let bitmap_picture = loadHex::read_file("input.dat");
+
+
+  //print hex tuple
+  for command in bitmap_picture.iter() {
     let res = loadHex::convert_to_binary_string( command );
     println!("{}", res);
   }
+
 }
