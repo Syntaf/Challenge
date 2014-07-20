@@ -10,7 +10,13 @@
   reference: http://www.reddit.com/r/dailyprogrammer/comments/2avd5i/7162014_challenge_171_intermediate_zoom_rotate/
 */
 
+mod loadHex;
 
 fn main() {
-  println!("this is the start of hexmap_rotation");
+  let results = loadHex::read_file("input.dat");
+
+  for command in results.iter() {
+    let res = loadHex::convert_to_binary_string( command );
+    println!("{}", res);
+  }
 }
