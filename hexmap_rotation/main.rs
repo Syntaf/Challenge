@@ -12,29 +12,59 @@
 
 mod loadHex;
 
+struct bitmap_image {
+  bitmap_picture: Vec<(String,String)>,
+  invert: bool
+}
+
+impl bitmap_image {
+  fn load_bitmap(&mut self, file: &str) {
+    self.bitmap_picture = loadHex::read_file(file);
+  }
+}
+
 //zoom hex picture
-fn zoom_hex(tup: &(String, String)) {
+fn zoom_hex(bmp: &mut bitmap_image) {
 
 }
 
 //rotate hex picture
-fn rotate_hex(tup: &(String, String)) {
+fn rotate_hex(bmp: &mut bitmap_image) {
 
 }
 
 //invert hex picture
-fn invert_hex(tup: &(String, String)) {
+fn invert_hex(bmp: &mut bitmap_image) {
+  bmp.invert = !bmp.invert;
+}
 
+fn print_bitmap(bmp: bitmap_image) {
+  //print hex tuple
+  for command in bmp.bitmap_picture.iter() {
+    let mut res = loadHex::convert_to_binary_string( command ).into_ascii();
+
+    //if picture is inverted, invert now
+    if bmp.invert {
+
+      for c in res.mut_iter() {
+        *c = match c.to_char() {
+          'x' => ' ',
+           _  => 'x'
+        }.to_ascii();
+      }
+
+    }
+
+    println!("{}", res.as_slice().as_str_ascii());
+  }
 }
 
 fn main() {
-  let bitmap_picture = loadHex::read_file("input.dat");
+  let mut hex_bitmap = bitmap_image { bitmap_picture: vec![], invert: false };
 
+  hex_bitmap.load_bitmap("input.dat");
 
-  //print hex tuple
-  for command in bitmap_picture.iter() {
-    let res = loadHex::convert_to_binary_string( command );
-    println!("{}", res);
-  }
+  invert_hex(&mut hex_bitmap);
 
+  print_bitmap(hex_bitmap);
 }
