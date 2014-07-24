@@ -23,18 +23,24 @@ impl bitmap_image {
   fn load_bitmap(&mut self, file: &str) {
     self.bitmap_picture = loadHex::read_file(file);
   }
-}
 
-impl bitmap_image {
   fn invert_hexmap(&mut self) {
     self.invert = !self.invert;
+  }
+
+  fn zoom_hexmap(&mut self, zoom_val: int) {
+    self.zoom = zoom_val;
   }
 }
 
 //zoom hex picture, used in the print_bitmap function when the user
 //  specifies a zoom
-fn zoom_hex(bmp: &mut bitmap_image) {
-
+fn zoom_ascii_hex_string(bmp: &mut bitmap_image) {
+  for &(ref mut x, ref mut y) in bmp.bitmap_picture.mut_iter() {
+    let dec_num = (loadHex::hex_to_dec(x.clone()) * 16 +
+      loadHex::hex_to_dec(y.clone())) * 2;
+    println!("{}", dec_num);
+  }
 }
 
 //rotate hex picture, this is used in the print_bitmap function when the
@@ -45,8 +51,8 @@ fn rotate_hex(bmp: &mut bitmap_image) {
 
 //invert hex picture, this is used in the print_bitmap function
 //  to save space and break apart one large code base.
-fn invert_ascii_hex_string(res: &mut [std::ascii::Ascii]) {
-  for c in res.mut_iter() {
+fn invert_ascii_hex_string(line: &mut [std::ascii::Ascii]) {
+  for c in line.mut_iter() {
     *c = match c.to_char() {
       'x' => ' ',
        _  => 'x'
@@ -78,11 +84,7 @@ fn main() {
 
   hex_bitmap.load_bitmap("input.dat");
 
-  //invert once
-  hex_bitmap.invert_hexmap();
-  print_bitmap(&hex_bitmap);
-  println!("");
-  //invert once more(now normal)
-  hex_bitmap.invert_hexmap();
-  print_bitmap(&hex_bitmap);
+  zoom_ascii_hex_string(&mut hex_bitmap);
+
+  //print_bitmap(&hex_bitmap);
 }

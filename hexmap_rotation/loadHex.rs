@@ -23,6 +23,11 @@ pub fn hex_to_bin(c: &str) -> &str{
   }
 }
 
+pub fn hex_to_dec(c: String) -> uint{
+  let dat = c.into_ascii().get(0).to_char();
+  return dat.to_digit(16).unwrap();
+}
+
 pub fn convert_to_binary_string(tup: &(String,String) ) -> String{
   let &(ref x, ref y) = tup;
   hex_to_bin(x.as_slice()).to_string().append(hex_to_bin(y.as_slice()))
