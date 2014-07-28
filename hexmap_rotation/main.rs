@@ -14,7 +14,7 @@ mod loadHex;
 
 //bitmap image struct
 struct bitmap_image {
-  bitmap_picture: Vec<(String,String)>,
+  bitmap_picture: Vec<String>,
   invert: bool,
   zoom: int
 }
@@ -36,11 +36,6 @@ impl bitmap_image {
 //zoom hex picture, used in the print_bitmap function when the user
 //  specifies a zoom
 fn zoom_ascii_hex_string(bmp: &mut bitmap_image) {
-  for &(ref mut x, ref mut y) in bmp.bitmap_picture.mut_iter() {
-    let dec_num = (loadHex::hex_to_dec(x.clone()) * 16 +
-      loadHex::hex_to_dec(y.clone())) * 2;
-    println!("{}", dec_num);
-  }
 }
 
 //rotate hex picture, this is used in the print_bitmap function when the
@@ -84,7 +79,7 @@ fn main() {
 
   hex_bitmap.load_bitmap("input.dat");
 
-  zoom_ascii_hex_string(&mut hex_bitmap);
+  //hex_bitmap.invert_hexmap();
 
-  //print_bitmap(&hex_bitmap);
+  print_bitmap(&hex_bitmap);
 }
