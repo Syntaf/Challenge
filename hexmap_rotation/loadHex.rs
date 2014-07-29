@@ -1,5 +1,6 @@
 use std::io::File;
 use std::io::BufferedReader;
+use std::fmt::UpperHex;
 
 pub fn hex_to_bin(c: char) -> String{
   String::from_str(
@@ -24,9 +25,13 @@ pub fn hex_to_bin(c: char) -> String{
   })
 }
 
-pub fn hex_to_dec(c: String) -> uint{
-  let dat = c.into_ascii().get(0).to_char();
+pub fn hex_to_dec(c: char) -> uint{
+  let dat = String::from_char(1u,c).into_ascii().get(0).to_char();
   return dat.to_digit(16).unwrap();
+}
+
+pub fn dec_to_hex_str(num: uint) -> String {
+  String::from_str(format!("{:X}", num).as_slice())
 }
 
 pub fn convert_to_binary_string(ss: &String ) -> String{

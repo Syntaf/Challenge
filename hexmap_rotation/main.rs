@@ -10,13 +10,15 @@
   reference: http://www.reddit.com/r/dailyprogrammer/comments/2avd5i/7162014_challenge_171_intermediate_zoom_rotate/
 */
 
+use std::num;
+
 mod loadHex;
 
 //bitmap image struct
 struct bitmap_image {
   bitmap_picture: Vec<String>,
   invert: bool,
-  zoom: int
+  zoom: uint
 }
 
 impl bitmap_image {
@@ -27,15 +29,21 @@ impl bitmap_image {
   fn invert_hexmap(&mut self) {
     self.invert = !self.invert;
   }
-
-  fn zoom_hexmap(&mut self, zoom_val: int) {
-    self.zoom = zoom_val;
-  }
 }
 
 //zoom hex picture, used in the print_bitmap function when the user
 //  specifies a zoom
-fn zoom_ascii_hex_string(bmp: &mut bitmap_image) {
+fn zoom_ascii_hex_string(bmp: &mut bitmap_image, zoom_dg: uint) {
+  bmp.zoom = zoom_dg;
+  for line in bmp.bitmap_picture.mut_iter() {
+    let mut dec_num = 0;
+    let mut incr = 0;
+    for ch in line.as_slice().chars().rev() {
+      dec_num += loadHex::hex_to_dec(ch) * num::pow(16u,incr);
+      incr += 1;
+    }
+    *line = loadHex::dec_to_hex_str(dec_num);
+  }
 }
 
 //rotate hex picture, this is used in the print_bitmap function when the
@@ -80,6 +88,7 @@ fn main() {
   hex_bitmap.load_bitmap("input.dat");
 
   //hex_bitmap.invert_hexmap();
+  zoom_ascii_hex_string(&mut hex_bitmap, 2);
 
   print_bitmap(&hex_bitmap);
 }
