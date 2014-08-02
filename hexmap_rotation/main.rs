@@ -17,11 +17,10 @@ mod manipHex;
 struct bitmap_image {
   bitmap_picture: Vec<String>,
   invert: bool,
-  zoom: uint
+  zoom: uint,
+  rotate: Option<uint>
 }
 
-//these are the actual functions to use, the public functions below are
-//  implementations of these functions
 impl bitmap_image {
   fn load_bitmap(&mut self, file: &str) {
     self.bitmap_picture = loadHex::read_file(file);
@@ -61,10 +60,17 @@ fn print_bitmap(bmp: &bitmap_image) {
 
 fn main() {
   let mut hex_bitmap =
-    bitmap_image { bitmap_picture: vec![], invert: false, zoom: 1 };
+    bitmap_image {
+      bitmap_picture: vec![],
+      invert: false,
+      zoom: 1,
+      rotate: None
+    };
 
+  //load from file
   hex_bitmap.load_bitmap("input.dat");
 
+  //invert hexmap, then zoom in
   hex_bitmap.invert_hexmap();
   hex_bitmap.zoom_hexmap(2);
 
