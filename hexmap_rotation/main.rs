@@ -30,16 +30,17 @@ impl bitmap_image {
   fn invert_hexmap(&mut self) {
     self.invert = !self.invert;
   }
+
+  fn zoom_hexmap(&mut self, zoom_dg: uint) {
+    self.zoom = zoom_dg;
+  }
 }
 
 //zoom hex picture, used in the print_bitmap function when the user
 //  specifies a zoom
-fn zoom_ascii_hex_string(bmp: &mut bitmap_image, zoom_dg: uint) {
-  bmp.zoom = zoom_dg;
-  for line in bmp.bitmap_picture.iter() {
-    let mut res = loadHex::convert_to_binary_string( line ).into_ascii();
+fn zoom_ascii_hex_string(line: &mut [std::ascii::Ascii]) {
     let mut rr = String::from_str("");
-    for ch in res.as_mut_slice().as_str_ascii().chars(){
+    for ch in line.as_mut_slice().as_str_ascii().chars(){
       rr.push_str(
         match ch {
           'x' => "xx",
@@ -49,7 +50,6 @@ fn zoom_ascii_hex_string(bmp: &mut bitmap_image, zoom_dg: uint) {
     }
     println!("{}", rr);
     println!("{}", rr);
-  }
 }
 
 //rotate hex picture, this is used in the print_bitmap function when the
@@ -80,10 +80,14 @@ fn print_bitmap(bmp: &bitmap_image) {
 
     //if picture is inverted, invert now
     if bmp.invert {
-        invert_ascii_hex_string(res.as_mut_slice());
+      invert_ascii_hex_string(res.as_mut_slice());
     }
 
-    println!("{}", res.as_slice().as_str_ascii());
+    if bmp.zoom != 1 {
+      zoom_ascii_hex_string(res.as_mut_slice());
+    } else {
+      println!("{}", res.as_slice().as_str_ascii());
+    }
   }
 }
 
@@ -94,7 +98,7 @@ fn main() {
   hex_bitmap.load_bitmap("input.dat");
 
   //hex_bitmap.invert_hexmap();
-  zoom_ascii_hex_string(&mut hex_bitmap, 2);
+  hex_bitmap.zoom_hexmap(2);
 
-  //print_bitmap(&hex_bitmap);
+  print_bitmap(&hex_bitmap);
 }
