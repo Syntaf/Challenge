@@ -11,6 +11,7 @@
 */
 
 use std::num;
+use std::num::ToStrRadix;
 
 mod loadHex;
 
@@ -35,14 +36,19 @@ impl bitmap_image {
 //  specifies a zoom
 fn zoom_ascii_hex_string(bmp: &mut bitmap_image, zoom_dg: uint) {
   bmp.zoom = zoom_dg;
-  for line in bmp.bitmap_picture.mut_iter() {
-    let mut dec_num = 0;
-    let mut incr = 0;
-    for ch in line.as_slice().chars().rev() {
-      dec_num += loadHex::hex_to_dec(ch) * num::pow(16u,incr);
-      incr += 1;
+  for line in bmp.bitmap_picture.iter() {
+    let mut res = loadHex::convert_to_binary_string( line ).into_ascii();
+    let mut rr = String::from_str("");
+    for ch in res.as_mut_slice().as_str_ascii().chars(){
+      rr.push_str(
+        match ch {
+          'x' => "xx",
+           _  => "  "
+        }
+      )
     }
-    *line = loadHex::dec_to_hex_str(dec_num);
+    println!("{}", rr);
+    println!("{}", rr);
   }
 }
 
@@ -90,5 +96,5 @@ fn main() {
   //hex_bitmap.invert_hexmap();
   zoom_ascii_hex_string(&mut hex_bitmap, 2);
 
-  print_bitmap(&hex_bitmap);
+  //print_bitmap(&hex_bitmap);
 }
