@@ -6,6 +6,7 @@ use std;
 //  specifies a zoom
 pub fn zoom_ascii_hex_string(line: &mut [std::ascii::Ascii], zoom_dg: uint) {
     let mut rr = String::from_str("");
+    //copy every character in place ZOOM_DG times
     for ch in line.as_mut_slice().as_str_ascii().chars(){
       for i in range(0u,zoom_dg) {
         rr.push_str(ch.to_string().as_slice());

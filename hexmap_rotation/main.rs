@@ -59,6 +59,7 @@ fn print_bitmap(bmp: &bitmap_image) {
 }
 
 fn main() {
+  
   let mut hex_bitmap =
     bitmap_image {
       bitmap_picture: vec![],
