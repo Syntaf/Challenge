@@ -10,18 +10,19 @@
   reference: http://www.reddit.com/r/dailyprogrammer/comments/2avd5i/7162014_challenge_171_intermediate_zoom_rotate/
 */
 
+use std::io;
+
 mod loadHex;
 mod manipHex;
 
 //bitmap image struct
-struct bitmap_image {
+struct BitmapImage {
   bitmap_picture: Vec<String>,
   invert: bool,
-  zoom: uint,
-  rotate: Option<uint>
+  zoom: uint
 }
 
-impl bitmap_image {
+impl BitmapImage {
   fn load_bitmap(&mut self, file: &str) {
     self.bitmap_picture = loadHex::read_file(file);
   }
@@ -39,7 +40,7 @@ impl bitmap_image {
 //  will do most of the work. It will convert each command into a binary
 //  string, then parse any invert/zoom/rotate functions on the string before
 //  displaying it.
-fn print_bitmap(bmp: &bitmap_image) {
+fn print_bitmap(bmp: &BitmapImage) {
   //print hex tuple
   for command in bmp.bitmap_picture.iter() {
     let mut res = loadHex::convert_to_binary_string( command ).into_ascii();
@@ -59,14 +60,19 @@ fn print_bitmap(bmp: &bitmap_image) {
 }
 
 fn main() {
-  
+
   let mut hex_bitmap =
-    bitmap_image {
+    BitmapImage {
       bitmap_picture: vec![],
       invert: false,
-      zoom: 1,
-      rotate: None
+      zoom: 1
     };
+
+  /*
+  for line in io::stdin().lines() {
+    print!("{}", line.unwrap());
+  }
+  */
 
   //load from file
   hex_bitmap.load_bitmap("input.dat");
