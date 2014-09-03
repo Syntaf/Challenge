@@ -11,6 +11,7 @@
 */
 
 use std::io;
+use std::num;
 
 mod loadHex;
 mod manipHex;
@@ -68,11 +69,18 @@ fn main() {
       zoom: 1
     };
 
-  /*
-  for line in io::stdin().lines() {
-    print!("{}", line.unwrap());
-  }
-  */
+  let input_num: int = match from_str(
+    match io::stdin().read_line() {
+      Ok(txt) => txt,
+      Err(e)  => String::from_str("error")
+    }.as_slice().trim()) {
+      Some(i) => i,
+      None    => -1
+    };
+
+  println!("{}", input_num);
+
+
 
   //load from file
   hex_bitmap.load_bitmap("input.dat");
