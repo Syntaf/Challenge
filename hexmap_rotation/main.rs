@@ -11,7 +11,6 @@
 */
 
 use std::io;
-use std::num;
 
 mod loadHex;
 mod manipHex;
@@ -72,7 +71,7 @@ fn main() {
   let input_num: int = match from_str(
     match io::stdin().read_line() {
       Ok(txt) => txt,
-      Err(e)  => String::from_str("error")
+      Err(e)  => { println!("{}", e.detail.unwrap()); String::from_str("error")}
     }.as_slice().trim()) {
       Some(i) => i,
       None    => -1
