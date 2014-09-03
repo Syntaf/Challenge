@@ -68,25 +68,35 @@ fn main() {
       zoom: 1
     };
 
-  let input_num: int = match from_str(
-    match io::stdin().read_line() {
-      Ok(txt) => txt,
-      Err(e)  => { println!("{}", e.detail.unwrap()); String::from_str("error")}
-    }.as_slice().trim()) {
-      Some(i) => i,
-      None    => -1
-    };
-
-  println!("{}", input_num);
-
-
 
   //load from file
   hex_bitmap.load_bitmap("input.dat");
 
-  //invert hexmap, then zoom in
-  hex_bitmap.invert_hexmap();
-  hex_bitmap.zoom_hexmap(2);
+  loop {
+    print!("[1] - print map\n[2] - invert map\n[3] - zoom x\n[4] - exit\ninput: ");
 
-  print_bitmap(&hex_bitmap);
+    // read line from user to execute commands
+    let input_num: int = match from_str(
+      match io::stdin().read_line() {
+        Ok(txt) => txt,
+        Err(e)  => { println!("{}", e.detail.unwrap()); String::from_str("error")}
+      }.as_slice().trim()) {
+        Some(i) => i,
+        None    => -1
+      };
+
+    match input_num {
+      1 =>  print_bitmap(&hex_bitmap),
+      2 =>  {hex_bitmap.invert_hexmap(); print_bitmap(&hex_bitmap);},
+      3 =>  {
+              print!("Zoom by(integer): ");
+              let zoom_val: uint =
+                from_str(io::stdin().read_line().unwrap().as_slice().trim()).unwrap();
+              hex_bitmap.zoom_hexmap(zoom_val);
+              print_bitmap(&hex_bitmap);
+            },
+      4 =>  break,
+      _ => println!("Invalid choice ... re-enter ")
+    };
+  }
 }
