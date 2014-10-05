@@ -1,10 +1,6 @@
 #include <iostream>
 #include <algorithm>
 
-/* 
- * converted C fib algorithm to compile
- * and take advantage of c++ concepts
-*/
 long long fibonacci(int n)
 {
   long long fib[2][2] = {{1,1},{1,0}},
