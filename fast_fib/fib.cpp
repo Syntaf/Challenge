@@ -4,6 +4,7 @@
 /* 
  * converted C fib algorithm to compile
  * and take advantage of c++ concepts
+ * runetime should be O(log N)
 */
 long long fibonacci(int n)
 {
