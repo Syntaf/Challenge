@@ -31,4 +31,3 @@ for h in validhandles:
 	print((" : " + h))
 	f.write("@".join(h.split("at")).ljust(15) + (" : " + h) + "\n")
 print("done... out.txt")
-f.close()
