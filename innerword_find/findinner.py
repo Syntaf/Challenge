@@ -4,7 +4,7 @@
 #trie tree impl
 import marisa_trie
 
-filename = "enable1.txt"
+filename = input("Enter filename: ")
 
 #get array of data
 with open(filename) as f:
