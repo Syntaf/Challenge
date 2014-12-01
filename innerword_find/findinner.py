@@ -13,18 +13,21 @@ with open(filename) as f:
 #create trie
 trie = marisa_trie.Trie(content)
 
-#loop through content and find prefixes of word, keep track of biggest word
 maxword = ""
 maxcount = 0
+
+#loop through content and determine all prefixes present in word
 for h in content:
-    tmp = h
-    pref = trie.prefixes(tmp)
-    for i in range(len(h) - 1):
-        tmp.remove(0)
-        preftmp = trie.prefixes(tmp)
-        pref.append(preftmp)
+    word = h
+    pref = trie.prefixes(word)
+    #loop through such that each character is considred the start
+    #once 
+    while len(word) > 1:
+        word = word[1:]
+        cutpref = trie.prefixes(word)
+        pref.append(cutpref)    
+    #replace new highest word if true
     count = len(pref)
-    print(pref)
     if count > maxcount:
         maxcount = count
         maxword = h    
