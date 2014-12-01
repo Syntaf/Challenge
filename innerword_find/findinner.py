@@ -8,7 +8,7 @@ filename = "enable1.txt"
 
 #get array of data
 with open(filename) as f:
-		content = f.read().splitlines()
+	content = f.read().splitlines()
 
 #create trie
 trie = marisa_trie.Trie(content)
@@ -17,9 +17,17 @@ trie = marisa_trie.Trie(content)
 maxword = ""
 maxcount = 0
 for h in content:
-		print(h," ", end="")
-		pref = trie.prefixes(h)
-		print(pref)
+    tmp = h
+    pref = trie.prefixes(tmp)
+    for i in range(len(h) - 1):
+        tmp.remove(0)
+        preftmp = trie.prefixes(tmp)
+        pref.append(preftmp)
+    count = len(pref)
+    print(pref)
+    if count > maxcount:
+        maxcount = count
+        maxword = h    
 
 print(maxword)
 
