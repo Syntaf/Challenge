@@ -4,22 +4,33 @@
 #trie tree impl
 import marisa_trie
 
-filename = "enable1.txt"
+filename = input("Enter filename: ")
 
 #get array of data
 with open(filename) as f:
-		content = f.read().splitlines()
+	content = f.read().splitlines()
 
 #create trie
 trie = marisa_trie.Trie(content)
 
-#loop through content and find prefixes of word, keep track of biggest word
 maxword = ""
 maxcount = 0
+
+#loop through content and determine all prefixes present in word
 for h in content:
-		print(h," ", end="")
-		pref = trie.prefixes(h)
-		print(pref)
+    word = h
+    pref = trie.prefixes(word)
+    #loop through such that each character is considred the start
+    #once 
+    while len(word) > 1:
+        word = word[1:]
+        cutpref = trie.prefixes(word)
+        pref.append(cutpref)    
+    #replace new highest word if true
+    count = len(pref)
+    if count > maxcount:
+        maxcount = count
+        maxword = h    
 
 print(maxword)
 
