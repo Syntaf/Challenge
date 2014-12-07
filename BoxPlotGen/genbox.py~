@@ -23,9 +23,14 @@ def printBars(alist, indices):
 
 def printBoxTop(alist, indices):
 		for i in range(0, len(alist)):
+				num = int(alist[i])
 				n = len(alist[i])
-				if alist[i] > alist[indices[0]-1]:
-						if alist[i] <= alist[indices[2]-1]:
+				if num == int(alist[indices[0]-1]):
+						print(" " * (n-1) + "_", end="_")
+				elif num == int(alist[indices[2]-1]):
+						print(" " * (n-1) + "_", end="_")
+				elif num > int(alist[indices[0]-1]):
+						if num < int(alist[indices[2]-1]):
 								print("_" * (n+1), end="")
 				else:
 						print(" " * n, end=" ")
@@ -42,8 +47,8 @@ def printLowerBars(alist, indices):
 						print("_" * (n-1) + "|", end="_")
 				elif i == indices[2]-1:
 						print("_" * (n-1) + "|", end=" ")
-				elif alist[i] > alist[indices[0]-1]:
-						if alist[i] <= alist[indices[2]-1]:
+				elif num >= int(alist[indices[0]-1]):
+						if num < int(alist[indices[2]-1]):
 								print("_" * (n+1),end="")
 				else:
 						print(" " * n, end=" ")
@@ -83,6 +88,6 @@ for stringnum in content:
 				print("X"," " * (n-1),sep="",end=" ")
 		else:
 				print(num,end=" ")
-print("",end="\n\n")
+print("")
 
 printLowerBars(content, indices)
