@@ -8,30 +8,47 @@ def partition(alist, indices):
 		return [alist[i:j] for i, j in zip([0]+indices, indices+[None])]
 
 def printBars(alist, indices):
-		for i in range(0, len(content)):
-				num = int(content[i])
-				n = len(content[i])
-				if i in(indices[1]-1, indices[0]-1, indices[2]-1):
+		for i in range(0, len(alist)):
+				num = int(alist[i])
+				n = len(alist[i])
+				if i in (indices[1]-1, indices[0]-1, indices[2]-1):
 						print(" " * (n-1) + "|", end=" ")
 				elif num < lowerbound:
-						print(content[i], end=" ")
+						print(alist[i], end=" ")
 				elif num > upperbound:
-						print(content[i], end= " ")
+						print(alist[i], end= " ")
 				else:
 						print(" " * n, end=" ")
 		print("")
 
 def printBoxTop(alist, indices):
-		for i in range(0, len(content)):
-				n = len(content[i])
-				if content[i] > content[indices[0]-1]:
-						if content[i] <= content[indices[2]-1]:
+		for i in range(0, len(alist)):
+				n = len(alist[i])
+				if alist[i] > alist[indices[0]-1]:
+						if alist[i] <= alist[indices[2]-1]:
 								print("_" * (n+1), end="")
 				else:
 						print(" " * n, end=" ")
 		print("")
 
-filename = input("Enter filename: ")
+
+def printLowerBars(alist, indices):
+		for i in range(0, len(alist)):
+				num = int(alist[i])
+				n = len(alist[i])
+				if i == indices[0]-1:
+						print(" " * (n-1) + "|", end="_")
+				elif i == indices[1]-1:
+						print("_" * (n-1) + "|", end="_")
+				elif i == indices[2]-1:
+						print("_" * (n-1) + "|", end=" ")
+				elif alist[i] > alist[indices[0]-1]:
+						if alist[i] <= alist[indices[2]-1]:
+								print("_" * (n+1),end="")
+				else:
+						print(" " * n, end=" ")
+
+filename = input("Enter filename: ") 
 print("")
 
 #get data into string
@@ -66,3 +83,6 @@ for stringnum in content:
 				print("X"," " * (n-1),sep="",end=" ")
 		else:
 				print(num,end=" ")
+print("")
+
+printLowerBars(content, indices)
