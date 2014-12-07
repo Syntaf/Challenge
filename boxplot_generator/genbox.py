@@ -7,6 +7,7 @@ from math import ceil
 def partition(alist, indices):
 		return [alist[i:j] for i, j in zip([0]+indices, indices+[None])]
 
+#print the top of the rectangle
 def printBars(alist, indices):
 		for i in range(0, len(alist)):
 				num = int(alist[i])
@@ -21,6 +22,7 @@ def printBars(alist, indices):
 						print(" " * n, end=" ")
 		print("")
 
+#print the second top most part of the rectangle
 def printBoxTop(alist, indices):
 		for i in range(0, len(alist)):
 				num = int(alist[i])
@@ -36,7 +38,7 @@ def printBoxTop(alist, indices):
 						print(" " * n, end=" ")
 		print("")
 
-
+#print the second lowest AND lowest part of the rectangle
 def printLowerBars(alist, indices):
 		for i in range(0, len(alist)):
 				num = int(alist[i])
@@ -52,9 +54,9 @@ def printLowerBars(alist, indices):
 								print("_" * (n+1),end="")
 				else:
 						print(" " * n, end=" ")
+		print("")
 
 filename = input("Enter filename: ") 
-print("")
 
 #get data into string
 with open(filename) as f:
@@ -72,6 +74,7 @@ indices = [
 #split list into quartiles
 chunks = partition(content, indices)
 
+#compute Inner Quartile Region, Upper and Lower bound
 iqr = int(content[indices[2]-1]) - int(content[indices[0]-1])
 lowerbound = int(content[indices[0]-1]) - 1.5*iqr
 upperbound = int(content[indices[2]-1]) + 1.5*iqr
