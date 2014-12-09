@@ -17,7 +17,7 @@ pub fn zoom_ascii_hex_string(line: &mut [std::ascii::Ascii], zoom_dg: uint) {
 //invert hex picture, this is used in the print_bitmap function
 //  to save space and break apart one large code base.
 pub fn invert_ascii_hex_string(line: &mut [std::ascii::Ascii]) {
-  for c in line.mut_iter() {
+  for c in line.iter() {
     *c = match c.to_char() {
       'x' => ' ',
        _  => 'x'

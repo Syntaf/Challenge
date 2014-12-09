@@ -31,7 +31,9 @@ fn hex_to_bin(c: &str) -> &str{
 
 fn convert_to_binary_string(tup: &(&str,&str) ) -> String{
   let &(x, y) = tup;
-  hex_to_bin(x).to_string().append(hex_to_bin(y))
+  let mut res = hex_to_bin(x).to_string();
+  res.push_str(hex_to_bin(y));
+  return res;
 }
 
 fn main() {
