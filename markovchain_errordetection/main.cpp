@@ -5,6 +5,8 @@
 #include <iostream>
 #include <fstream>
 #include <utility>
+#include <sstream>
+
 #include <map>
 
 typedef std::map<char, std::map<char, int> > markov_map;
@@ -16,6 +18,7 @@ int main()
     //def table that has 2d length and width of the alphabet
 	markov_map markov_chain;
 	std::string filename;
+	std::string readtmp;
     
     std::cout << "Enter filename: ";
     std::cin >> filename;
@@ -24,6 +27,20 @@ int main()
         std::cout << "invalid filename - " << filename << std::endl;
         return -1;
     }
+
+	std::cout << "File read complete...\n" <<
+			"Enter the words you would like to check:\n";
+
+	//ignore first newline to prevent getline ending early
+	std::cin.ignore();
+	std::getline(std::cin, readtmp, '\n');
+	std::stringstream ss(readtmp);
+
+	//extract from stringstream one word at a time and check probability of word being wrong
+	do {
+		std::string word;
+		ss >> word;
+	} while(ss);
 
 	/* print contents of markov_chain
 	for(auto i : markov_chain) {
