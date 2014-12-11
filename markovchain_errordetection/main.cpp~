@@ -34,23 +34,28 @@ int main()
 	//ignore first newline to prevent getline ending early
 	std::cin.ignore();
 	std::getline(std::cin, readtmp, '\n');
+	readtmp.erase(readtmp.find_last_not_of(" ")+1);
 	std::stringstream ss(readtmp);
 
-	do {
-		std::string word;
-		ss >> word;
-		std::cout << word << std::endl;
-	} while(ss);
+	std::string word;
+	ss >> word;
 
-	/* print contents of markov_chain
-	for(auto i : markov_chain) {
-		for(auto h : std::get<1>(i)) {
-			std::cout << std::get<0>(i) << "->" << std::get<0>(h) <<
-				" " << std::get<1>(h) << std::endl;
+	//extract from stringstream one word at a time and check probability of word being wrong
+	while(ss) {
+		bool possible_error = false;
+		for(int i = 0; i < word.length()-1; i++) {
+			if(markov_chain[word[i]][word[i+1]] < 100) {
+				std::cout << word << " is likely to have incorrect spelling\n";
+				possible_error = true;
+				break;
+			}
 		}
+		if(!possible_error)
+			std::cout << word << " appears to be spelt correctly\n";
+		ss >> word;
 	}
-	*/
-
+	
+	return 0;
 }
 
 bool readFile(const std::string& filename, markov_map& data)
