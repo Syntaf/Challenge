@@ -25,14 +25,12 @@ int main()
         return -1;
     }
 
-	/* print contents of markov_chain
 	for(auto i : markov_chain) {
 		for(auto h : std::get<1>(i)) {
 			std::cout << std::get<0>(i) << "->" << std::get<0>(h) <<
 				" " << std::get<1>(h) << std::endl;
 		}
 	}
-	*/
 
 }
 
