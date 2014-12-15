@@ -4,6 +4,8 @@
 */
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <iterator>
 #include <ctime>
 #include <cstdlib>
 
@@ -11,12 +13,9 @@
 const int EMPTY=0;
 const int ASTEROID=1;
 const int GRAVITYWELL=2;
+const int WALL=3;
 
 void printMap(const std::vector<std::vector<int> > &space_map);
-bool adjacentToWell(const std::vector<std::vector<int> > &mp, 
-                    int index,
-                    int r,
-                    int c);
 
 int main()
 {
@@ -25,16 +24,18 @@ int main()
     int dim=0;
     std::cout << "Enter the dimensions of the map([N][N]): ";
     std::cin >> dim;
+    std::vector<std::vector<int> > space_map(dim+2);
 
-    //create two dimensional space map
-    std::vector<std::vector<int> > space_map(dim);
+	//create upper wall
+	std::fill_n(back_inserter(space_map[0]), dim+2, WALL);
 
     //assign each tile to certain space value
     //  gravity well - 10%
     //  asteroid     - 30%
     //  empty space  - 60%
-    for(int i = 0; i < dim; i++) {
-        for(int j = 0; j < dim; j++) {
+    for(int i = 1; i < dim+1; i++) {
+		space_map[i].push_back(WALL);
+        for(int j = 1; j < dim+1; j++) {
             int probability = (rand() % 100) + 1;
             if(probability < 10)
                 space_map[i].push_back(GRAVITYWELL);
@@ -43,8 +44,12 @@ int main()
             else
                 space_map[i].push_back(EMPTY);
         }
+		space_map[i].push_back(WALL);
     }
-    std::cout << "passed\n";
+
+	//create lower wall
+	std::fill_n(back_inserter(space_map[dim+1]), dim+2, WALL);
+    
     printMap(space_map);
 
     return 0;
@@ -61,17 +66,8 @@ void printMap(const std::vector<std::vector<int> > &space_map)
             else if(adjacentToWell(space_map, space_map[r][c],r,c))
                 std::cout << "X ";
             else if(c > 0)
-            else
-                std::cout << ". ";
-        }
+        		std::cout << ".";
+		}
         std::cout << std::endl;
     }
-}
-
-bool adjacentToWell(const std::vector<std::vector<int> > &mp, 
-                    int index,
-                    int r,
-                    int c)
-{
-
 }
