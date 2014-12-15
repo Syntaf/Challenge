@@ -13,10 +13,6 @@ const int ASTEROID=1;
 const int GRAVITYWELL=2;
 
 void printMap(const std::vector<std::vector<int> > &space_map);
-bool adjacentToWell(const std::vector<std::vector<int> > &mp, 
-                    int index,
-                    int r,
-                    int c);
 
 int main()
 {
@@ -58,20 +54,17 @@ void printMap(const std::vector<std::vector<int> > &space_map)
                 std::cout << "A ";
             else if(space_map[r][c] == GRAVITYWELL)
                 std::cout << "G ";
-            else if(adjacentToWell(space_map, space_map[r][c],r,c))
+            else if((r < space_map.size()-2 && c < space_map.size()-2) && (
+                    space_map[r][c-1] == GRAVITYWELL ||
+                    space_map[r][c+1] == GRAVITYWELL ||
+                    space_map[r-1][c] == GRAVITYWELL ||
+                    space_map[r+1][r] == GRAVITYWELL ||
+                    space_map[r+1][c+1] == GRAVITYWELL ||
+                    space_map[r-1][c-1] == GRAVITYWELL))
                 std::cout << "X ";
-            else if(c > 0)
             else
                 std::cout << ". ";
         }
         std::cout << std::endl;
     }
-}
-
-bool adjacentToWell(const std::vector<std::vector<int> > &mp, 
-                    int index,
-                    int r,
-                    int c)
-{
-
 }
