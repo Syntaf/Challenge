@@ -10,16 +10,13 @@
 #include <cstdlib>
 
 
-const int EMPTY=0;
-const int ASTEROID=1;
-const int GRAVITYWELL=2;
-const int WALL=3;
+const int EMPTY=0;			//Empty Space
+const int ASTEROID=1;		//Asteroid
+const int GRAVITYWELL=2;	//Gravity Well
+const int ADJTOWELL=3;	    //Area Affected by Gravity Well
+const int WALL=4;			//Map Boarder
 
 void printMap(const std::vector<std::vector<int> > &space_map);
-bool adjacentToWell(const std::vector<std::vector<int> > &mp, 
-                    int index,
-                    int r,
-                    int c);
 
 int main()
 {
@@ -53,6 +50,21 @@ int main()
 
 	//create lower wall
 	std::fill_n(back_inserter(space_map[dim+1]), dim+2, WALL);
+
+	//set all tiles adjacent to G to X
+	for(int i = 1; i <= dim; i++) {
+		for(int j = 1; j <= dim; j++) {
+			if(space_map[i][j] == GRAVITYWELL) {
+				for(int di = -1; di <= 1; di++) {
+					for(int dj = -1; dj <= 1; dj++) { //dj turn the music up
+						if(di == 0 && dj == 0)
+							continue;
+						space_map[i + di][j + dj] = ADJTOWELL;
+					}
+				}
+			}
+		}
+	}
     
     printMap(space_map);
 
@@ -61,16 +73,25 @@ int main()
 
 void printMap(const std::vector<std::vector<int> > &space_map)
 {
-    for(int r = 0; r < space_map.size(); r++) {
-        for(int c = 0; c < space_map.size(); c++) {
-            if(space_map[r][c] == ASTEROID)
-                std::cout << "A ";
-            else if(space_map[r][c] == GRAVITYWELL)
-                std::cout << "G ";
-            else if(adjacentToWell(space_map, space_map[r][c],r,c))
-                std::cout << "X ";
-            else if(c > 0)
-        		std::cout << ".";
+    for(int r = 1; r <= space_map.size()-2; r++) {
+        for(int c = 1; c <= space_map.size()-2; c++) {
+			switch(space_map[r][c]) {
+				case EMPTY:
+					std::cout << ". ";
+				break;
+				case ASTEROID:
+					std::cout << "A ";
+				break;
+				case GRAVITYWELL:
+					std::cout << "G ";
+				break;
+				case ADJTOWELL:
+					std::cout << "X ";
+				break;
+				default:
+					std::cout << "? ";
+
+			}
 		}
         std::cout << std::endl;
     }
