@@ -14,7 +14,8 @@ const int EMPTY=0;			//Empty Space
 const int ASTEROID=1;		//Asteroid
 const int GRAVITYWELL=2;	//Gravity Well
 const int ADJTOWELL=3;	    //Area Affected by Gravity Well
-const int WALL=4;			//Map Boarder
+const int PATH=4;			//Path to finish
+const int WALL=5;			//Map Boarder
 
 void printMap(const std::vector<std::vector<int> > &space_map);
 
@@ -38,15 +39,18 @@ int main()
 		space_map[i].push_back(WALL);
         for(int j = 1; j < dim+1; j++) {
             int probability = (rand() % 100) + 1;
-            if(probability < 10)
+            if(probability < 8)
                 space_map[i].push_back(GRAVITYWELL);
-            else if(probability < 30)
+            else if(probability < 20)
                 space_map[i].push_back(ASTEROID);
             else
                 space_map[i].push_back(EMPTY);
         }
 		space_map[i].push_back(WALL);
     }
+
+	//start and end should always be... start and end
+	space_map[1][1] = space_map[dim][dim] = EMPTY;
 
 	//create lower wall
 	std::fill_n(back_inserter(space_map[dim+1]), dim+2, WALL);
@@ -75,23 +79,31 @@ void printMap(const std::vector<std::vector<int> > &space_map)
 {
     for(int r = 1; r <= space_map.size()-2; r++) {
         for(int c = 1; c <= space_map.size()-2; c++) {
-			switch(space_map[r][c]) {
-				case EMPTY:
-					std::cout << ". ";
-				break;
-				case ASTEROID:
-					std::cout << "A ";
-				break;
-				case GRAVITYWELL:
-					std::cout << "G ";
-				break;
-				case ADJTOWELL:
-					std::cout << "X ";
-				break;
-				default:
-					std::cout << "? ";
+			if(r == 1 && c == 1)
+				std::cout << "S ";
+			else if(r == space_map.size()-2 && c == space_map.size()-2)
+				std::cout << "E ";
+			else
+				switch(space_map[r][c]) {
+					case EMPTY:
+						std::cout << ". ";
+					break;
+					case ASTEROID:
+						std::cout << "A ";
+					break;
+					case GRAVITYWELL:
+						std::cout << "G ";
+					break;
+					case ADJTOWELL:
+						std::cout << ". ";
+					break;
+					case PATH:
+						std::cout << "O ";
+					break;
+					default:
+						std::cout << "? ";
 
-			}
+					}
 		}
         std::cout << std::endl;
     }
