@@ -178,7 +178,7 @@ std::string findPath( const int &xStart, const int &yStart,
                     pq[pqi].pop();
 
 					//empty the larger size pq to the smaller one
-                    if(pq[pqi].size() > pq[1-pqi].size())
+                    if(pq[pqi].size() > pq[1- pqi].size())
                         pqi = 1 - pqi;
                     while(!pq[pqi].empty()) {
                         pq[1-pqi].push(pq[pqi].top());

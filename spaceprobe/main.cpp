@@ -112,7 +112,7 @@ void printMap(const std::vector<std::vector<int>> &space_map)
 						std::cout << "G ";
 					break;
 					case ADJTOWELL:
-						std::cout << "X ";
+						std::cout << ". ";
 					break;
 					case PATH:
 						std::cout << "O ";
