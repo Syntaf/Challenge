@@ -1,7 +1,7 @@
 # program to expand any acronyms in a sentence, takes input file for key
 # to determine what is an acronym or not
 
-filename = "key.dat" 
+filename = input("Enter a filename: ")
 
 #get array of data
 with open(filename) as f:
