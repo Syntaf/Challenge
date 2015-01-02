@@ -1,0 +1,5 @@
+3
+/bin:/usr/bin
+/usr/bin:/usr/local/bin/
+/usr/local/bin/log:/var/log-2014
+/bin/log/rc
