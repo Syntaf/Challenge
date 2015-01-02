@@ -1,4 +1,0 @@
-2
-/etc:/tmp/etc/
-/tmp/etc/:/etc/
-/etc/modprobe.d/config/
