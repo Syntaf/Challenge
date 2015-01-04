@@ -2,7 +2,7 @@
 # This is a very useful linux script for building anything HPX on the
 # Hermione cluster. Made by Martin Stumpf
 
-SCRIPTPATH=$( cd $(dirname $0) ; pwd -P)
+SCRIPTPATH=$( cd $(dirname $0) ; pwd -P )
 INSTALL_PATH=$SCRIPTPATH/install
 BUILD_PATH=$SCRIPTPATH/build
 
