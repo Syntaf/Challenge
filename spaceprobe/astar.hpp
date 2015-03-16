@@ -69,12 +69,17 @@ bool operator<(const node &a, const node &b)
 //returns a string of direction digits
 std::string findPath( const int &xStart, const int &yStart,
                  const int xFinish, const int &yFinish,
-                 std::vector< std::vector<int>> map)
+                 std::vector<std::vector<int>> map)
 {
 	//shortcut for size of array entered
     const int n = map.size();
 
 	//arrays used for A-star algorithm
+
+    //std::vector<std::vector<int>> closed_nodes_map(n, std::vector<int>(n));
+    //std::vector<std::vector<int>> open_nodes_map(n, std::vector<int>(n));
+    //std::vector<std::vector<int>> dir_map(n, std::vector<int>(n));
+
     int closed_nodes_map[n][n];
     int open_nodes_map[n][n];
     int dir_map[n][n];
@@ -94,8 +99,9 @@ std::string findPath( const int &xStart, const int &yStart,
             open_nodes_map[x][y] = 0;
         }
     }
-
-	//create start node and push into list of open nodes
+	
+    x = y = 0;
+    //create start node and push into list of open nodes
     n0 = new node(xStart, yStart, 0, 0);
     n0->updatePriority(xFinish, yFinish);
     pq[pqi].push(*n0);
