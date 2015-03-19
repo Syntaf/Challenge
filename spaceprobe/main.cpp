@@ -71,9 +71,8 @@ int main()
 			}
 		}
 	}
-
     std::string route = findPath(1,1,dim,dim,makeReadyMap(space_map));
-    if(route == "")
+	if(route == "")
         std::cout << "No possible route found\n";
 
     if(route.length() > 0) {

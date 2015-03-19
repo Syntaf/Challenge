@@ -1,5 +1,6 @@
 //astar.hpp
 #include <iostream>
+#include <algorithm>
 #include <iomanip>
 #include <queue>
 #include <string>
@@ -141,7 +142,7 @@ std::string findPath( const int &xStart, const int &yStart,
 			//empty lower leftover nodes
             while(!pq[pqi].empty())
                 pq[pqi].pop();
-            return path;
+			return path;
         }
 
 		//generate modes in all possible directions
@@ -155,7 +156,7 @@ std::string findPath( const int &xStart, const int &yStart,
 				 map[xdx][ydy] == 1 || closed_nodes_map[xdx][ydy] == 1)) {
 				//create child node
                 m0 = new node( xdx, ydy, n0->getLevel(),
-                        n0->getPriority());
+                	n0->getPriority());
                 m0->nextLevel(i);
                 m0->updatePriority(xFinish, yFinish);
 
