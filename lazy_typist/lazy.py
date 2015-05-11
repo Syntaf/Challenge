@@ -1,3 +1,5 @@
+# Program to simulate the 'hawk eye' typing program with a qwerty keyboard
+
 from parse import board_parse, distance, find_shift
 board = board_parse("board.dat")
 shifts = find_shift(board)
