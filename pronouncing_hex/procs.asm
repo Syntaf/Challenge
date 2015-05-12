@@ -144,21 +144,21 @@ getHex:
         inc rax
         jmp addNull
     doneAddNull:
-    mov byte[r9], NULL      ; set NULL terminated string
+    mov byte[r9], NULL          ; set NULL terminated string
 
-    cmp byte[rbx], 0x30     ; ensure first byte is '0'
+    cmp byte[rbx], 0x30         ; ensure first byte is '0'
     je goodByte
         mov rdi, errBadInput    ; print bad input
         call printString
         jmp reprompt            ; re-prompt
     goodByte:
-    cmp byte[rbx+1], 0x78   ; ensure second byte is 'x'
+    cmp byte[rbx+1], 0x78       ; ensure second byte is 'x'
     je _goodByte
         mov rdi, errBadInput    ; print bad input
         call printString
         jmp reprompt            ; re-prompt
     _goodByte:
-    cmp byte[rbx+2], NULL   ; if there isn't anything after '0x', bad
+    cmp byte[rbx+2], NULL       ; if there isn't anything after '0x', bad
     jne __goodByte
         mov rdi, errBadInput    ; print bad input
         call printString

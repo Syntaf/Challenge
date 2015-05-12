@@ -58,30 +58,29 @@ main:
     
     mov dword[len], eax     ; store length into len variable
 
-     mov rbx, 2
-     xor r10, r10
-     xor r12, r12
-     mov r9, input
+    mov rbx, 2              ; begin after the '0x'
+    xor r10, r10            ; clear r10 for storing byte
+    mov r9, input           ; move address of input into r9
     
     printBytes:
         
-        cmp ebx, 4
+        cmp ebx, 4                      ; first compare if we have more than two digits
         jne skipPrint
-            mov rdi, doubleDigits
+            mov rdi, doubleDigits       ; if so print 'bitey' 
             call printString
-            mov rdi, space
+            mov rdi, space              ; print ' '
             call printString
         skipPrint 
 
-        mov dil, byte[r9+rbx]
-        call matchByte
-
-        cmp rax, TRUE
-        je success
-            mov rdi, errReturnVal
+        mov dil, byte[r9+rbx]           ; get byte
+        call matchByte                  ; print corresponding string
+    
+        cmp rax, TRUE                   ; if function successful
+        je success                      ; skip
+            mov rdi, errReturnVal       ; else print error string
             call printString
             
-            mov rax, r9
+            mov rax, r9                 ; print out byte that caused FALSE
             add rax, rbx
             mov rsi, rax
             mov rdx, 1
@@ -89,18 +88,18 @@ main:
             mov rdi, STDOUT
             syscall
             
-            mov rdi, errReturnValFin
+            mov rdi, errReturnValFin    ; print out last part of error string
             call printString
             jmp endPrintBytes
         success:
 
-        inc rbx
-        cmp ebx, dword[len]
+        inc rbx                         ; increment count
+        cmp ebx, dword[len]             ; ensure count is within length
         jge endPrintBytes
         jmp printBytes
     endPrintBytes: 
 
-    mov rdi, newLine
+    mov rdi, newLine        ; end program with newline print
     call printString
     
 ; **********************************************
