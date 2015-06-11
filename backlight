@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]
+    then
+        echo "try running --help for options"
+        exit 0
+fi
+
+if [ $1 == "--help" ]
+    then
+        echo "Usage: backlight <integer>"
+        exit 0
+fi
+
+echo $1 | sudo tee /sys/class/leds/samsung::kbd_backlight/brightness
+

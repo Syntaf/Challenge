@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# uses user input and wmctrl to move terminal windows to a
+# set location on my laptop
+
+if [ $# -eq 0 ]
+    then
+        echo "try running --help for options"
+        exit 0
+fi
+
+if [ $1 == "--help" ]
+    then
+        echo "commands: -[l/rt/mt/mb/rb]" 
+        echo "l  : left align"
+        echo "rt : right align"
+        echo "mt : middle top align"
+        echo "mb : middle bottom align"
+        echo "rb : right bottom align"
+fi
+
+if [ $1 == "-l" ]
+	then
+        wmctrl -r :ACTIVE: -e 0,10,40,585,820		# left align
+fi
+
+if [ $1 == "-rt" ]
+    then
+        wmctrl -r :ACTIVE: -e 0,1200,40,390,580 	# right align
+fi
+
+if [ $1 == "-mt" ]
+    then
+        wmctrl -r :ACTIVE: -e 0,605,40,580,175		# top align
+fi
+
+if [ $1 == "-mb" ]
+    then
+        wmctrl -r :ACTIVE: -e 0,605,220,580,640		# bottom align
+fi
+
+if [ $1 == "-rb" ]
+    then
+        wmctrl -r :ACTIVE: -e 0,1200,650,390,210	# br align
+fi

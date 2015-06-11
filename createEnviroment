@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# program to automatically create a terminal enviroment on my samsung laptop
+
+xfce4-terminal
+./format -l
+
+xfce4-terminal -e "bash -c 'htop; exec bash'"
+./format -mt
+
+xfce4-terminal -e "bash -c 'cat ~/.geo.txt; exec bash'"
+./format -rt
+
+xfce4-terminal
+./format -mb
+
