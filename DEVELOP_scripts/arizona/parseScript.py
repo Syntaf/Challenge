@@ -1,3 +1,11 @@
+"""
+    @author: Grant Mercer
+    gmercer015@gmail.com
+
+    Script designed to read in a data file of a specific format as
+    dat.txt shows, and display information on each station formatted
+    according to format.dat . 
+"""
 import re
 import string
 
@@ -21,7 +29,7 @@ for dat in data[1:-1]:
     # perform black magic, don't even try to understand this
     dat = dat.translate(string.maketrans("", "", ), bad_chars).split(',')
     key_map.append(dict(x.split(':') for x in dat if ':' in x ))
-    if ':' not in dat[1]:key_map['NAME']+=dat[k][1]
+    if ':' not in dat[1]:key_map['NAME']+=dat[1]
 
 
 for station in range(0, len(key_map)):
