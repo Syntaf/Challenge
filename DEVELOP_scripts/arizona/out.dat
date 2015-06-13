@@ -1,4 +1,4 @@
-NAME : Phoenix
+NAME : Phoenix, Phoenix-DeerValleyMunicipalAirport
 STID : KDVT
 LONGITUDE : -112.06618
 LATITUDE : 33.69026
@@ -22,7 +22,7 @@ ELEVATION : 859
 STATE : AZ
 ID : 194
 
-NAME : Glendale
+NAME : Glendale, GlendaleMunicipalAirport
 STID : KGEU
 LONGITUDE : -112.29528
 LATITUDE : 33.52722
@@ -54,7 +54,7 @@ ELEVATION : 1089
 STATE : AZ
 ID : 253
 
-NAME : Phoenix
+NAME : Phoenix, PhoenixSkyHarborInternationalAirport
 STID : KPHX
 LONGITUDE : -112.003465
 LATITUDE : 33.427799
@@ -62,7 +62,7 @@ ELEVATION : 1115
 STATE : AZ
 ID : 328
 
-NAME : Scottsdale
+NAME : Scottsdale, ScottsdaleAirport
 STID : KSDL
 LONGITUDE : -111.91056
 LATITUDE : 33.62278
@@ -566,7 +566,7 @@ ELEVATION : 1142
 STATE : AZ
 ID : 11412
 
-NAME : Chandler
+NAME : Chandler, ChandlerMunicipalAirport
 STID : KCHD
 LONGITUDE : -111.81111
 LATITUDE : 33.26917

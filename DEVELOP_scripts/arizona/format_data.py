@@ -8,6 +8,7 @@
 """
 import re
 import string
+from itertools import groupby
 
 bad_chars = '(){}"<>[] '     # characers we want to strip from the string
 key_map = []
@@ -25,11 +26,11 @@ with open("format.dat") as f:
 data = filter(len, data)
 
 # strip and split each station
-for dat in data[1:-1]:
+for k in range(1, len(data)-1):
     # perform black magic, don't even try to understand this
-    dat = dat.translate(string.maketrans("", "", ), bad_chars).split(',')
-    key_map.append(dict(x.split(':') for x in dat if ':' in x ))
-    if ':' not in dat[1]:key_map['NAME']+=dat[1]
+    dat = filter(None, data[k].translate(string.maketrans("", "", ), bad_chars).split(','))
+    key_map.append(dict(x.split(':') for x in dat if ':' in x))
+    if ':' not in dat[4] : key_map[k-1]['NAME']+=str(", " + dat[4])
 
 
 for station in range(0, len(key_map)):
