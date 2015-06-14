@@ -1,3 +1,0 @@
-wget http://api.mesowest.net/v2/stations/timeseries?token=0b1943fb6da945328d161ea6b64459ce&start
-=201405010000&end=201410310000&vars=air_temp_high_24_hour,air_temp_low_24_hour,relative
-_humidity,sea_level_pressure&units=english&output=csv&obtime=local&STID=KPHX
