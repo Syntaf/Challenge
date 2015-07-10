@@ -1,0 +1,7 @@
+[package]
+name = "sad_cycle"
+version = "0.1.0"
+authors = ["Syntaf <gmercer015@gmail.com>"]
+
+[dependencies]
+getopts = "0.2"
