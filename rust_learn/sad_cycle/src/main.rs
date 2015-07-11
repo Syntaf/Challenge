@@ -20,18 +20,21 @@ fn main() {
     options.reqopt("n", "num" , "set the value to compute sad cycle for",
                    "VALUE");
     
+    // if no arguments passed, print usage
     if args.len() == 1 {
         let brief = format!("Usage: {} [options]", program);
         print!("{}", options.usage(&brief));
         return;
     }
     
+    // get arguments from command line
     let matches = match options.parse(&args[1..]) {
         Ok(m) => { m },
         Err(f) => { panic!(f.to_string()) }
     };
 
-
+    
+    // grab base from cline
     let base: u32 = 
         if matches.opt_present("b") {
             match matches.opt_str("b").unwrap().parse::<u32>() {
@@ -42,7 +45,12 @@ fn main() {
             2u32
         };
 
-    println!("{}", base);
-    println!("{}", program)  
+    let val: u64 =
+        match matches.opt_str("n").unwrap().parse::<u64>() {
+            Ok(y) => { y },
+            Err(h) => { panic!(h.to_string()) }
+        };
+
+    println!("{base}, {value}", base=base, value=val);
 
 }
