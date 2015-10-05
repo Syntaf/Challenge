@@ -1,9 +1,9 @@
-/*
- *  main.rs
- *  Grant Mercer
- *  compute the sad cycle given an input range and a sad 
- *  cycle base
-*/
+//////////////////////////////////////////////////////////
+//  main.rs
+//  Grant Mercer
+//  compute the sad cycle given an input range and a sad 
+//  cycle base
+//////////////////////////////////////////////////////////
 
 extern crate getopts;
 
@@ -13,11 +13,11 @@ use getopts::Options;
 use std::env;
 
 fn main() {
-    let CYCLE = vec![4, 16, 37, 58, 89, 145, 42, 20];
     let args: Vec<String> = env::args().collect();
     let program = &args[0];
 
-    let cycle = circular::circular::Vector::new(vec![1,2,3], 2);
+    let sad_cycle = 
+        circular::Vector::new(vec![4, 16, 37, 58, 89, 145, 42, 20], 2);
 
     let mut options = Options::new();
     options.optopt("b", "base", "set the base for sad cycle", "VALUE");

@@ -1,0 +1,26 @@
+/* Conways ascii game of life
+ * Any cell that is alive or zero or just one livin neighbor is dead in the next generation
+ * Any cell that is alive and has two or three living neighbors lives happily onto next generation
+ * Any cell that is alive and has four of more neighbors gets smothered and dies
+ * Any cell that is dead and has exactly three neighbors is born, and alive
+*/
+
+use std::io::{self, BufRead};
+
+fn main() {
+    // Create reader, prompt user and grab a line
+    let mut reader = io::stdin();
+    let mut input_text = String::new();
+    match reader.read_line(&mut input_text) {
+        Err(e)  => { panic!("Error {}", e); },
+        Ok(_)   => { }
+    }
+
+    // Split line into white space separated sections
+    let mut input_iter = input_text.split_whitespace().map(
+        |x| x.trim().parse::<u8>().ok().expect("No integer found"));
+    let (a, b) = (input_iter.next().unwrap(), input_iter.next().unwrap());
+    println!("{} x {}" , a , b);
+}
+
+
