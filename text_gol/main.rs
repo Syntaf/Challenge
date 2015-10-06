@@ -5,6 +5,14 @@
  * Any cell that is dead and has exactly three neighbors is born, and alive
 */
 
+pub mod board;
+pub mod ruleset;
+pub mod game;
+
+use board::Board;
+use ruleset::Ruleset;
+use game::Game;
+
 use std::io::{self, BufRead};
 
 fn main() {
@@ -18,9 +26,13 @@ fn main() {
 
     // Split line into white space separated sections
     let mut input_iter = input_text.split_whitespace().map(
-        |x| x.trim().parse::<u8>().ok().expect("No integer found"));
+        |x| x.trim().parse::<usize>().ok().expect("Error, invalid integer detected"));
     let (a, b) = (input_iter.next().unwrap(), input_iter.next().unwrap());
-    println!("{} x {}" , a , b);
+
+    let mut board = Board::new(a, b);
+    let ruleset = Ruleset::new(ruleset::DEFAULT);
+    let mut game = Game::new(board, &ruleset);
 }
+
 
 
