@@ -32,6 +32,7 @@ fn main() {
     let mut board = Board::new(a, b);
     let ruleset = Ruleset::new(ruleset::DEFAULT);
     let mut game = Game::new(board, &ruleset);
+
 }
 
 
